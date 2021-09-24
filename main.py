@@ -14,4 +14,8 @@ class Mentor:
         self.surname = surname
         self.courses_attached = []
 
+class Lecturer(Mentor):
+    pass
+class Reviewer(Mentor):
+    pass
 
