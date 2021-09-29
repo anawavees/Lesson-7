@@ -16,18 +16,19 @@ class Student:
         else:
             return 'Ошибка'
 
-    def calc_avg_st(self):
+    def calc_avg(self):
         sum = 0
         quantity = 0
+        average = 0
         for val in self.grades.values():
             for grade in val:
                 sum += grade
                 quantity += 1
-                average_st = sum / quantity
-        return round(average_st, 2)
+                average = sum / quantity
+        return round(average, 2)
 
     def __str__(self):
-        return f"\n Имя: {self.name} \n Фамилия: {self.surname} \n Курсы в процессе изучения: {self.courses_in_progress} \n Завершенные курсы: {self.finished_courses} \n Средняя оценка за лекции: {self.calc_avg_st()}"
+        return f"\n Имя: {self.name} \n Фамилия: {self.surname} \n Курсы в процессе изучения: {self.courses_in_progress} \n Завершенные курсы: {self.finished_courses} \n Средняя оценка за лекции: {self.calc_avg()}"
 
 
 class Mentor:
@@ -45,6 +46,7 @@ class Lecturer(Mentor):
     def calc_avg(self):
         sum = 0
         quantity = 0
+        average = 0
         for val in self.grades.values():
             for grade in val:
                 sum += grade
@@ -74,27 +76,55 @@ class Reviewer(Mentor):
 
 best_student = Student('Ruoy', 'Eman', 'our_gender')
 best_student.courses_in_progress += ['Python', 'Введение в программирование']
+best_student.finished_courses += ['Git']
+
+best_student_1 = Student('Mrs', 'Moris', 'our_gender')
+best_student_1.courses_in_progress += ['Git']
+best_student_1.finished_courses += ['Введение в программирование']
 
 cool_mentor = Reviewer('Some', 'Buddy')
 cool_mentor.courses_attached += ['Python']
 
 cool_mentor.rate_hw(best_student, 'Python', 10)
 cool_mentor.rate_hw(best_student, 'Python', 7)
-cool_mentor.rate_hw(best_student, 'Python', 9)
+cool_mentor.rate_hw(best_student_1, 'Python', 9)
+cool_mentor.rate_hw(best_student_1, 'Python', 9)
 
 cool_lector = Lecturer('Tony', 'Stark')
 cool_lector.courses_attached += ['Введение в программирование']
 
 best_student.rate_hw_avg(cool_lector, 'Введение в программирование', 8)
-best_student.rate_hw_avg(cool_lector, 'Введение в программирование', 2)
+best_student.rate_hw_avg(cool_lector, 'Введение в программирование', 7)
 
-print(cool_lector.grades)
+cool_lector_1 = Lecturer('Thor', 'Simpson')
+cool_lector_1.courses_attached += ['Git']
 
-print(cool_lector.calc_avg())
+best_student_1.rate_hw_avg(cool_lector_1, 'Git', 10)
+best_student_1.rate_hw_avg(cool_lector_1, 'Git', 8)
 
-print(best_student.grades)
+# print(cool_lector.grades)
+#
+# print(cool_lector_1.grades)
+#
+# print(cool_lector.calc_avg())
+#
+# print(cool_lector_1.calc_avg())
 
-print(best_student.calc_avg_st())
+def chec_avg(l_1, l_2):
+    if l_1.calc_avg() > l_2.calc_avg():
+        print(f'{l_1.name} {l_1.surname} лучше')
+    elif l_1.calc_avg() < l_2.calc_avg():
+        print(f'{l_2.name} {l_2.surname} лучше')
+    else:
+        print(f'они равны')
+
+chec_avg(cool_lector, cool_lector_1)
+
+# print(best_student.grades)
+#
+# print(best_student.calc_avg())
+
+chec_avg(best_student, best_student_1)
 
 print(best_student)
 
