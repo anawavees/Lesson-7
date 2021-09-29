@@ -16,6 +16,19 @@ class Student:
         else:
             return 'Ошибка'
 
+    def calc_avg_st(self):
+        sum = 0
+        quantity = 0
+        for val in self.grades.values():
+            for grade in val:
+                sum += grade
+                quantity += 1
+                average_st = sum / quantity
+        return round(average_st, 2)
+
+    def __str__(self):
+        return f"\n Имя: {self.name} \n Фамилия: {self.surname} \n Курсы в процессе изучения: {self.courses_in_progress} \n Завершенные курсы: {self.finished_courses} \n Средняя оценка за лекции: {self.calc_avg_st()}"
+
 
 class Mentor:
     def __init__(self, name, surname):
@@ -37,7 +50,10 @@ class Lecturer(Mentor):
                 sum += grade
                 quantity += 1
                 average = sum / quantity
-        return average
+        return round(average, 2)
+
+    def __str__(self):
+        return f"\n Имя: {self.name} \n Фамилия: {self.surname} \n Средняя оценка за лекции: {self.calc_avg()}"
 
 class Reviewer(Mentor):
     def __init__(self, name, surname):
@@ -51,6 +67,9 @@ class Reviewer(Mentor):
                 student.grades[course] = [grade]
         else:
             return 'Ошибка'
+
+    def __str__(self):
+        return f"\n Имя: {self.name} \n Фамилия: {self.surname}"
 
 
 best_student = Student('Ruoy', 'Eman', 'our_gender')
@@ -74,3 +93,11 @@ print(cool_lector.grades)
 print(cool_lector.calc_avg())
 
 print(best_student.grades)
+
+print(best_student.calc_avg_st())
+
+print(best_student)
+
+print(cool_lector)
+
+print(cool_mentor)
