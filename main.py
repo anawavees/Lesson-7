@@ -88,43 +88,35 @@ class Reviewer(Mentor):
         return f"\n Имя: {self.name} \n Фамилия: {self.surname}"
 
 
-best_student = Student('Ruoy', 'Eman', 'our_gender')
-best_student.courses_in_progress += ['Python', 'Введение в программирование']
-best_student.finished_courses += ['Git']
+ruoy = Student('Ruoy', 'Eman', 'our_gender')
+ruoy.courses_in_progress += ['Python', 'Введение в программирование']
+ruoy.finished_courses += ['Git']
 
-best_student_1 = Student('Mrs', 'Moris', 'our_gender')
-best_student_1.courses_in_progress += ['Git']
-best_student_1.finished_courses += ['Введение в программирование']
+moris = Student('Mrs', 'Moris', 'our_gender')
+moris.courses_in_progress += ['Git']
+moris.finished_courses += ['Введение в программирование']
 
-cool_mentor = Reviewer('Some', 'Buddy')
-cool_mentor.courses_attached += ['Python']
+some = Reviewer('Some', 'Buddy')
+some.courses_attached += ['Python']
 
-cool_mentor.rate_hw(best_student, 'Python', 10)
-cool_mentor.rate_hw(best_student, 'Python', 7)
-cool_mentor.rate_hw(best_student_1, 'Python', 9)
-cool_mentor.rate_hw(best_student_1, 'Python', 9)
+some.rate_hw(ruoy, 'Python', 10)
+some.rate_hw(ruoy, 'Python', 9)
+some.rate_hw(moris, 'Python', 9)
+some.rate_hw(moris, 'Python', 9)
 
-cool_lector = Lecturer('Tony', 'Stark')
-cool_lector.courses_attached += ['Введение в программирование']
-cool_lector.courses_attached += ['Git']
+tony = Lecturer('Tony', 'Stark')
+tony.courses_attached += ['Введение в программирование']
+tony.courses_attached += ['Git']
 
-best_student.rate_hw_avg(cool_lector, 'Введение в программирование', 8)
-best_student.rate_hw_avg(cool_lector, 'Введение в программирование', 7)
-best_student.rate_hw_avg(cool_lector, 'Git', 10)
+ruoy.rate_hw_avg(tony, 'Введение в программирование', 8)
+ruoy.rate_hw_avg(tony, 'Введение в программирование', 7)
+ruoy.rate_hw_avg(tony, 'Git', 10)
 
-cool_lector_1 = Lecturer('Thor', 'Simpson')
-cool_lector_1.courses_attached += ['Git']
+thor = Lecturer('Thor', 'Simpson')
+thor.courses_attached += ['Git']
 
-best_student_1.rate_hw_avg(cool_lector_1, 'Git', 10)
-best_student_1.rate_hw_avg(cool_lector_1, 'Git', 10)
-
-# print(cool_lector.grades)
-#
-# print(cool_lector_1.grades)
-#
-# print(cool_lector.calc_avg())
-#
-# print(cool_lector_1.calc_avg())
+moris.rate_hw_avg(thor, 'Git', 10)
+moris.rate_hw_avg(thor, 'Git', 7)
 
 def chec_avg(l_1, l_2):
     if l_1.calc_avg() > l_2.calc_avg():
@@ -134,53 +126,47 @@ def chec_avg(l_1, l_2):
     else:
         print(f'они равны')
 
-# def calc_avg_lect(Lecturer, course):
-#     sum = 0
-#     quantity = 0
-#     average = 0
-#     if course in Lecturer.courses_attached:
-#          for course in Lecturer.grades.keys():
-#              for val in Lecturer.grades.values():
-#                     for grade in val:
-#                      sum += grade
-#                      quantity += 1
-#                      average = sum / quantity
-#              return print(round(average, 2))
+all_lectors = [tony, thor]
 
-AllLectors = [cool_lector, cool_lector_1]
-print(AllLectors)
+all_students = [ruoy, moris]
 
-def calc_avg_lect(ALect, ACourse):
+def calc_avg_lect(alect, acourse):
     sum = 0
     quantity = 0
     average = 0
-    #Lecturer.__init__()
-    for L in ALect:
-      if ACourse in L.courses_attached:
-        for course in L.grades.keys():
-          if ACourse == course:
-            #print(course)
-            for val in L.grades[course]:
-              #for grade in val:
-                #print(val)
+    for l in alect:
+      if acourse in l.courses_attached:
+        for course in l.grades.keys():
+          if acourse == course:
+            for val in l.grades[course]:
                 sum += val
                 quantity += 1
-                average = sum / quantity
-    return print(round(average, 2))
+    average = sum / quantity
+    return print(f'Средний балл по преподавателям на курсе {acourse}: {round(average, 2)}')
 
-calc_avg_lect(AllLectors, 'Git')
+calc_avg_lect(all_lectors, 'Git')
 
-# chec_avg(cool_lector, cool_lector_1)
+def calc_avg_stud(astud, acourse):
+    sum = 0
+    quantity = 0
+    average = 0
+    for s in astud:
+      if acourse in s.courses_in_progress:
+        for course in s.grades.keys():
+          if acourse == course:
+            for val in s.grades[course]:
+                sum += val
+                quantity += 1
+    average = sum / quantity
+    return print(f'Средний балл по студентам на курсе {acourse}: {round(average, 2)}')
 
-# print(best_student.grades)
-#
-# print(best_student.calc_avg())
+calc_avg_stud(all_students, 'Python')
 
-chec_avg(best_student, best_student_1)
+chec_avg(ruoy, moris)
 
-print(best_student)
+print(ruoy)
 
-print(cool_lector)
+print(tony)
 
-print(cool_mentor)
+print(some)
 
