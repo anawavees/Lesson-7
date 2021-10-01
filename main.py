@@ -57,6 +57,20 @@ class Lecturer(Mentor):
     def __str__(self):
         return f"\n Имя: {self.name} \n Фамилия: {self.surname} \n Средняя оценка за лекции: {self.calc_avg()}"
 
+    def calc_avg_lect(self, name, course):
+        sum = 0
+        quantity = 0
+        average = 0
+        if course in name.courses_attached:
+             for course in name.grades.keys():
+                for val in name.grades.values():
+                    for grade in val:
+                        sum += grade
+                        quantity += 1
+                        average = sum / quantity
+             return print(round(average, 2))
+
+
 class Reviewer(Mentor):
     def __init__(self, name, surname):
         super().__init__(name, surname)
@@ -92,15 +106,17 @@ cool_mentor.rate_hw(best_student_1, 'Python', 9)
 
 cool_lector = Lecturer('Tony', 'Stark')
 cool_lector.courses_attached += ['Введение в программирование']
+cool_lector.courses_attached += ['Git']
 
 best_student.rate_hw_avg(cool_lector, 'Введение в программирование', 8)
 best_student.rate_hw_avg(cool_lector, 'Введение в программирование', 7)
+best_student.rate_hw_avg(cool_lector, 'Git', 10)
 
 cool_lector_1 = Lecturer('Thor', 'Simpson')
 cool_lector_1.courses_attached += ['Git']
 
 best_student_1.rate_hw_avg(cool_lector_1, 'Git', 10)
-best_student_1.rate_hw_avg(cool_lector_1, 'Git', 8)
+best_student_1.rate_hw_avg(cool_lector_1, 'Git', 10)
 
 # print(cool_lector.grades)
 #
@@ -118,7 +134,43 @@ def chec_avg(l_1, l_2):
     else:
         print(f'они равны')
 
-chec_avg(cool_lector, cool_lector_1)
+# def calc_avg_lect(Lecturer, course):
+#     sum = 0
+#     quantity = 0
+#     average = 0
+#     if course in Lecturer.courses_attached:
+#          for course in Lecturer.grades.keys():
+#              for val in Lecturer.grades.values():
+#                     for grade in val:
+#                      sum += grade
+#                      quantity += 1
+#                      average = sum / quantity
+#              return print(round(average, 2))
+
+AllLectors = [cool_lector, cool_lector_1]
+print(AllLectors)
+
+def calc_avg_lect(ALect, ACourse):
+    sum = 0
+    quantity = 0
+    average = 0
+    #Lecturer.__init__()
+    for L in ALect:
+      if ACourse in L.courses_attached:
+        for course in L.grades.keys():
+          if ACourse == course:
+            #print(course)
+            for val in L.grades[course]:
+              #for grade in val:
+                #print(val)
+                sum += val
+                quantity += 1
+                average = sum / quantity
+    return print(round(average, 2))
+
+calc_avg_lect(AllLectors, 'Git')
+
+# chec_avg(cool_lector, cool_lector_1)
 
 # print(best_student.grades)
 #
@@ -131,3 +183,4 @@ print(best_student)
 print(cool_lector)
 
 print(cool_mentor)
+
