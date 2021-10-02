@@ -30,6 +30,26 @@ class Student:
     def __str__(self):
         return f"\n Имя: {self.name} \n Фамилия: {self.surname} \n Курсы в процессе изучения: {self.courses_in_progress} \n Завершенные курсы: {self.finished_courses} \n Средняя оценка за лекции: {self.calc_avg()}"
 
+    def __eq__(self, other):
+        if isinstance(other, Student):
+            if self.calc_avg() == other.calc_avg():
+                print(f'\n{self.name} равен {other.name}')
+            else:
+                print(f'\n{self.name} не равен {other.name}')
+
+    def __gt__(self, other):
+        if isinstance(other, Student):
+            if self.calc_avg() > other.calc_avg():
+                print(f'\n{self.name} больше {other.name}')
+            else:
+                print(f'\n{self.name} меньше {other.name}')
+
+    def __lt__(self, other):
+        if isinstance(other, Student):
+            if self.calc_avg() < other.calc_avg():
+                print(f'\n{self.name} меньше {other.name}')
+            else:
+                print(f'\n{self.name} больше {other.name}')
 
 class Mentor:
     def __init__(self, name, surname):
@@ -56,6 +76,28 @@ class Lecturer(Mentor):
 
     def __str__(self):
         return f"\n Имя: {self.name} \n Фамилия: {self.surname} \n Средняя оценка за лекции: {self.calc_avg()}"
+
+    def __eq__(self, other):
+        if isinstance(other, Lecturer):
+            if self.calc_avg() == other.calc_avg():
+                print(f'\n{self.name} равен {other.name}')
+            else:
+                print(f'\n{self.name} не равен {other.name}')
+
+    def __gt__(self, other):
+        if isinstance(other, Lecturer):
+            if self.calc_avg() > other.calc_avg():
+                print(f'\n{self.name} больше {other.name}')
+            else:
+                print(f'\n{self.name} меньше {other.name}')
+
+    def __lt__(self, other):
+        if isinstance(other, Lecturer):
+            if self.calc_avg() < other.calc_avg():
+                print(f'\n{self.name} меньше {other.name}')
+            else:
+                print(f'\n{self.name} больше {other.name}')
+
 
     def calc_avg_lect(self, name, course):
         sum = 0
@@ -118,13 +160,13 @@ thor.courses_attached += ['Git']
 moris.rate_hw_avg(thor, 'Git', 10)
 moris.rate_hw_avg(thor, 'Git', 7)
 
-def chec_avg(l_1, l_2):
-    if l_1.calc_avg() > l_2.calc_avg():
-        print(f'{l_1.name} {l_1.surname} лучше')
-    elif l_1.calc_avg() < l_2.calc_avg():
-        print(f'{l_2.name} {l_2.surname} лучше')
-    else:
-        print(f'они равны')
+# def chec_avg(l_1, l_2):
+#     if l_1.calc_avg() > l_2.calc_avg():
+#         print(f'{l_1.name} {l_1.surname} лучше')
+#     elif l_1.calc_avg() < l_2.calc_avg():
+#         print(f'{l_2.name} {l_2.surname} лучше')
+#     else:
+#         print(f'они равны')
 
 all_lectors = [tony, thor]
 
@@ -162,11 +204,23 @@ def calc_avg_stud(astud, acourse):
 
 calc_avg_stud(all_students, 'Python')
 
-chec_avg(ruoy, moris)
+# chec_avg(ruoy, moris)
 
 print(ruoy)
 
 print(tony)
 
 print(some)
+
+tony.__eq__(thor)
+
+tony.__gt__(thor)
+
+thor.__lt__(tony)
+
+ruoy.__eq__(moris)
+
+ruoy.__gt__(moris)
+
+moris.__lt__(ruoy)
 
